@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rotorwest — Sala VIP</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --fire:#df6429;
+  --ember:#b15329;
+  --dark:#151515;
+  --dark2:#1a1a1a;
+  --surface:#1e1e1e;
+  --text:#f0ece6;
+  --dim:#777;
+  --r:14px;
+}
+html,body{height:100%;overflow:hidden}
+body{font-family:'DM Sans',sans-serif;background:var(--dark);color:var(--text);-webkit-font-smoothing:antialiased;cursor:none;user-select:none}
+
+/* LAYOUT */
+.dash{display:grid;grid-template-rows:auto 1fr auto;height:100vh;padding:48px 64px 36px}
+
+/* HEADER */
+.hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:48px}
+.hdr-left{display:flex;align-items:center;gap:24px}
+.hdr-logo{height:44px;opacity:.8}
+.hdr-sep{width:1px;height:32px;background:rgba(255,255,255,.08)}
+.hdr-loc{font-size:16px;color:var(--dim);letter-spacing:.5px}
+.hdr-right{text-align:right}
+.clock{font-family:'Plus Jakarta Sans',sans-serif;font-size:64px;font-weight:700;letter-spacing:-2px;line-height:1}
+.date{font-size:17px;color:var(--dim);margin-top:6px;text-transform:capitalize}
+
+/* MAIN */
+.main{display:grid;grid-template-columns:1.1fr 1fr;gap:56px;min-height:0}
+
+/* WEATHER */
+.weather{display:flex;flex-direction:column;gap:28px}
+.weather-top{display:flex;align-items:center;gap:44px}
+.weather-anim{width:160px;height:160px;flex-shrink:0;position:relative}
+.weather-info{flex:1}
+.weather-temp{font-family:'Plus Jakarta Sans',sans-serif;font-size:120px;font-weight:800;line-height:1;letter-spacing:-4px}
+.weather-temp small{font-size:48px;font-weight:500;color:var(--dim);vertical-align:super}
+.weather-desc{font-size:26px;font-weight:500;color:var(--dim);margin-top:6px;text-transform:capitalize}
+.weather-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.weather-card{background:var(--surface);border-radius:var(--r);padding:24px 28px;border:1px solid rgba(255,255,255,.04)}
+.weather-card-label{font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:10px}
+.weather-card-value{font-family:'Plus Jakarta Sans',sans-serif;font-size:34px;font-weight:700}
+.weather-card-value small{font-size:16px;font-weight:400;color:var(--dim)}
+.weather-updated{font-size:12px;color:rgba(255,255,255,.2);padding-top:8px}
+
+/* NEWS TICKER */
+.news{margin-top:auto}
+.news-label{font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--fire);margin-bottom:12px}
+.news-list{display:flex;flex-direction:column;gap:10px}
+.news-item{display:flex;align-items:flex-start;gap:14px;padding:14px 20px;background:var(--surface);border-radius:var(--r);border:1px solid rgba(255,255,255,.04)}
+.news-item-time{font-size:11px;color:var(--fire);font-weight:600;white-space:nowrap;margin-top:2px}
+.news-item-text{font-size:14px;color:var(--dim);line-height:1.4}
+
+/* MESSAGES */
+.msg-panel{display:flex;flex-direction:column;background:var(--surface);border-radius:20px;border:1px solid rgba(255,255,255,.04);overflow:hidden}
+.msg-header{padding:28px 36px;border-bottom:1px solid rgba(255,255,255,.04);display:flex;align-items:center;justify-content:space-between}
+.msg-header-title{font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--fire)}
+.msg-status{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--dim)}
+.msg-status-dot{width:8px;height:8px;border-radius:50%;background:#4ade80;animation:pulse-dot 2s infinite}
+@keyframes pulse-dot{0%,100%{opacity:1}50%{opacity:.4}}
+.msg-body{flex:1;display:flex;align-items:center;justify-content:center;padding:56px 48px;text-align:center}
+.msg-text{font-family:'Plus Jakarta Sans',sans-serif;font-size:44px;font-weight:700;line-height:1.3;letter-spacing:-.5px;animation:msg-in .6s ease}
+.msg-default{color:var(--dim);font-size:36px;font-weight:500}
+.msg-active{color:var(--text)}
+@keyframes msg-in{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+.msg-footer{padding:24px 36px;border-top:1px solid rgba(255,255,255,.04);display:flex;align-items:center;gap:14px}
+.msg-footer-icon{width:36px;height:36px;border-radius:50%;background:rgba(223,100,41,.1);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.msg-footer-icon svg{width:16px;height:16px;stroke:var(--fire);fill:none;stroke-width:2}
+.msg-footer-text{font-size:14px;color:var(--dim);line-height:1.4}
+.msg-footer-text strong{color:var(--text);font-weight:600}
+
+/* WEATHER ANIMATIONS */
+/* Sun */
+.anim-sun{display:flex;align-items:center;justify-content:center}
+.anim-sun svg{width:140px;height:140px;animation:rotate-slow 30s linear infinite}
+@keyframes rotate-slow{to{transform:rotate(360deg)}}
+
+/* Clouds */
+.anim-clouds .cloud{position:absolute;background:rgba(255,255,255,.15);border-radius:100px}
+.anim-clouds .cloud-1{width:100px;height:40px;top:40px;left:20px;animation:drift 8s ease-in-out infinite}
+.anim-clouds .cloud-2{width:70px;height:30px;top:80px;left:60px;animation:drift 10s ease-in-out infinite reverse;opacity:.6}
+.anim-clouds .cloud-3{width:50px;height:22px;top:110px;left:30px;animation:drift 12s ease-in-out infinite;opacity:.3}
+@keyframes drift{0%,100%{transform:translateX(0)}50%{transform:translateX(20px)}}
+
+/* Rain */
+.anim-rain .rain-cloud{position:absolute;top:20px;left:50%;transform:translateX(-50%);width:100px;height:40px;background:rgba(255,255,255,.12);border-radius:100px}
+.anim-rain .rain-cloud::before{content:'';position:absolute;top:-15px;left:20px;width:50px;height:40px;background:rgba(255,255,255,.1);border-radius:50%}
+.anim-rain .drops{position:absolute;top:65px;left:30px;width:120px;height:100px;overflow:hidden}
+.anim-rain .drop{position:absolute;width:2px;background:linear-gradient(180deg,rgba(96,165,250,.6),transparent);border-radius:2px;animation:fall linear infinite}
+@keyframes fall{to{transform:translateY(100px);opacity:0}}
+
+/* Night */
+.anim-night .moon{position:absolute;top:30px;left:50%;margin-left:-25px;width:50px;height:50px;background:#e2e8f0;border-radius:50%;box-shadow:0 0 40px rgba(226,232,240,.2)}
+.anim-night .moon::after{content:'';position:absolute;top:-8px;left:12px;width:40px;height:40px;background:var(--dark);border-radius:50%}
+.anim-night .star{position:absolute;width:3px;height:3px;background:#fff;border-radius:50%;animation:twinkle 2s ease-in-out infinite}
+@keyframes twinkle{0%,100%{opacity:1}50%{opacity:.2}}
+
+/* Partly cloudy */
+.anim-partial .partial-sun{position:absolute;top:30px;left:30px;width:50px;height:50px;background:#f59e0b;border-radius:50%;box-shadow:0 0 40px rgba(245,158,11,.3)}
+.anim-partial .partial-cloud{position:absolute;top:60px;left:40px;width:100px;height:40px;background:rgba(255,255,255,.18);border-radius:100px;animation:drift 8s ease-in-out infinite}
+
+/* Pronto image overlay */
+.msg-img{position:absolute;bottom:60px;right:-100px;z-index:0;width:420px;opacity:0;transform:translateX(60px);transition:opacity .8s ease,transform .8s ease;pointer-events:none;overflow:visible}
+.msg-img img{width:100%;height:auto;object-fit:contain;filter:drop-shadow(0 8px 32px rgba(0,0,0,.5))}
+.msg-img.show{opacity:.9;transform:translateX(0)}
+.msg-panel{position:relative}
+.msg-body{position:relative;z-index:1}
+.msg-header{position:relative;z-index:1}
+.msg-footer{position:relative;z-index:1}
+
+/* Audio unlock overlay */
+.audio-unlock{position:fixed;inset:0;z-index:999;background:rgba(21,21,21,.95);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;cursor:pointer;transition:opacity .5s}
+.audio-unlock.hidden{opacity:0;pointer-events:none}
+.audio-unlock span{font-family:'Plus Jakarta Sans',sans-serif;font-size:20px;font-weight:600}
+.audio-unlock small{font-size:13px;color:var(--dim)}
+
+/* Connection lost overlay */
+.conn-lost{display:none;position:fixed;bottom:24px;right:24px;background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.3);border-radius:var(--r);padding:12px 20px;font-size:12px;color:#fca5a5}
+.conn-lost.show{display:block}
+</style>
+</head>
+<body>
+
+<div class="dash">
+  <header class="hdr">
+    <div class="hdr-left">
+      <img src="logoRTW.png" alt="Rotorwest" class="hdr-logo">
+      <div class="hdr-sep"></div>
+      <div class="hdr-loc">Aeroporto dos Amarais — SDAM, Campinas</div>
+    </div>
+    <div class="hdr-right">
+      <div class="clock" id="clock">00:00</div>
+      <div class="date" id="date"></div>
+    </div>
+  </header>
+
+  <div class="main">
+    <div class="weather">
+      <div class="weather-top">
+        <div class="weather-anim" id="weatherAnim"></div>
+        <div class="weather-info">
+          <div class="weather-temp" id="temp">--<small>°C</small></div>
+          <div class="weather-desc" id="desc">Carregando...</div>
+        </div>
+      </div>
+      <div class="weather-grid">
+        <div class="weather-card">
+          <div class="weather-card-label">Vento</div>
+          <div class="weather-card-value" id="wind">--<small> km/h</small></div>
+        </div>
+        <div class="weather-card">
+          <div class="weather-card-label">Umidade</div>
+          <div class="weather-card-value" id="humidity">--<small>%</small></div>
+        </div>
+        <div class="weather-card">
+          <div class="weather-card-label">Visibilidade</div>
+          <div class="weather-card-value" id="visibility">--<small> km</small></div>
+        </div>
+        <div class="weather-card">
+          <div class="weather-card-label">Pressão</div>
+          <div class="weather-card-value" id="pressure">--<small> hPa</small></div>
+        </div>
+      </div>
+      <div class="news">
+        <div class="news-label">Aviação</div>
+        <div class="news-list" id="newsList">
+          <div class="news-item"><span class="news-item-time">SDAM</span><span class="news-item-text">Condições favoráveis para operação VFR no Aeroporto dos Amarais</span></div>
+          <div class="news-item"><span class="news-item-time">INFO</span><span class="news-item-text">Pista principal em operação normal — sem restrições</span></div>
+        </div>
+      </div>
+      <div class="weather-updated" id="updated"></div>
+    </div>
+
+    <div class="msg-panel">
+      <div class="msg-img" id="msgImg"><img src="Pronto.png" alt=""></div>
+      <div class="msg-header">
+        <span class="msg-header-title">Informações</span>
+        <div class="msg-status"><span class="msg-status-dot" id="wsDot"></span><span id="wsStatus">Conectando</span></div>
+      </div>
+      <div class="msg-body">
+        <div class="msg-text msg-default" id="msgText">Bem-vindo à<br>Rotorwest</div>
+      </div>
+      <div class="msg-footer">
+        <div class="msg-footer-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <div class="msg-footer-text"><strong>Hangar Rotorwest</strong><br>Segurança e excelência em aviação executiva</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="audio-unlock" id="audioUnlock">
+  <img src="logoRTW.png" alt="Rotorwest" style="height:40px;opacity:.6;margin-bottom:8px">
+  <span>Toque para iniciar</span>
+  <small>Ativa o painel e as notificações sonoras</small>
+</div>
+<div class="conn-lost" id="connLost">Conexão perdida — reconectando...</div>
+
+<script>
+// NOTIFICATION CHIME (Web Audio API)
+const AudioCtx = window.AudioContext || window.webkitAudioContext;
+let audioCtx;
+let audioReady = false;
+
+document.getElementById('audioUnlock').addEventListener('click', () => {
+  audioCtx = new AudioCtx();
+  // Play a silent buffer to unlock
+  const buf = audioCtx.createBuffer(1, 1, 22050);
+  const src = audioCtx.createBufferSource();
+  src.buffer = buf;
+  src.connect(audioCtx.destination);
+  src.start(0);
+  audioReady = true;
+  document.getElementById('audioUnlock').classList.add('hidden');
+  // Test chime
+  setTimeout(playChime, 300);
+});
+
+function playChime() {
+  if (!audioReady || !audioCtx) return;
+  const now = audioCtx.currentTime;
+
+  // Two gentle bell tones — low then high
+  const notes = [523.25, 783.99]; // C5, G5
+  notes.forEach((freq, i) => {
+    const osc = audioCtx.createOscillator();
+    const g = audioCtx.createGain();
+    osc.type = 'triangle';
+    osc.frequency.value = freq;
+    osc.connect(g);
+    g.connect(audioCtx.destination);
+    const t = now + i * 0.3;
+    g.gain.setValueAtTime(0, t);
+    g.gain.linearRampToValueAtTime(0.12, t + 0.05);
+    g.gain.exponentialRampToValueAtTime(0.001, t + 1.8);
+    osc.start(t);
+    osc.stop(t + 1.8);
+  });
+}
+
+// ============================================================
+// CONFIGURAÇÃO — altere aqui
+// ============================================================
+const OWM_KEY = '543ed2124b2836caf73a8733687955a5'; // OpenWeatherMap API key
+const OWM_CITY = 'Campinas,BR';
+const WS_URL = `ws://${location.host}`;
+const WEATHER_INTERVAL = 10 * 60 * 1000; // 10 min
+// ============================================================
+
+// CLOCK
+const clockEl = document.getElementById('clock');
+const dateEl = document.getElementById('date');
+function updateClock() {
+  const now = new Date();
+  clockEl.textContent = now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+  dateEl.textContent = now.toLocaleDateString('pt-BR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+}
+updateClock();
+setInterval(updateClock, 10000);
+
+// WEATHER
+const tempEl = document.getElementById('temp');
+const descEl = document.getElementById('desc');
+const windEl = document.getElementById('wind');
+const humidityEl = document.getElementById('humidity');
+const visibilityEl = document.getElementById('visibility');
+const pressureEl = document.getElementById('pressure');
+const updatedEl = document.getElementById('updated');
+const animEl = document.getElementById('weatherAnim');
+
+function setWeatherAnim(code, isNight) {
+  animEl.innerHTML = '';
+  animEl.className = 'weather-anim';
+
+  if (code >= 200 && code < 600) {
+    // Rain / Drizzle / Snow / Thunderstorm
+    animEl.classList.add('anim-rain');
+    animEl.innerHTML = '<div class="rain-cloud"></div><div class="drops"></div>';
+    const drops = animEl.querySelector('.drops');
+    for (let i = 0; i < 12; i++) {
+      const d = document.createElement('div');
+      d.className = 'drop';
+      d.style.left = (i * 10) + 'px';
+      d.style.height = (15 + Math.random() * 15) + 'px';
+      d.style.animationDuration = (0.5 + Math.random() * 0.5) + 's';
+      d.style.animationDelay = (Math.random() * 1) + 's';
+      drops.appendChild(d);
+    }
+  } else if (code >= 801 && code <= 804) {
+    // Cloudy
+    animEl.classList.add('anim-clouds');
+    animEl.innerHTML = '<div class="cloud cloud-1"></div><div class="cloud cloud-2"></div><div class="cloud cloud-3"></div>';
+  } else if (code === 800 && isNight) {
+    // Clear night
+    animEl.classList.add('anim-night');
+    let html = '<div class="moon"></div>';
+    for (let i = 0; i < 8; i++) {
+      html += `<div class="star" style="top:${10+Math.random()*120}px;left:${10+Math.random()*140}px;animation-delay:${Math.random()*2}s"></div>`;
+    }
+    animEl.innerHTML = html;
+  } else if (code === 800) {
+    // Clear day
+    animEl.classList.add('anim-sun');
+    animEl.innerHTML = `<svg viewBox="0 0 200 200" fill="none">
+      <defs>
+        <radialGradient id="sg" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#fbbf24"/>
+          <stop offset="100%" stop-color="#f59e0b"/>
+        </radialGradient>
+      </defs>
+      <circle cx="100" cy="100" r="38" fill="url(#sg)"/>
+      <circle cx="100" cy="100" r="50" fill="none" stroke="#f59e0b" stroke-opacity=".15" stroke-width="12"/>
+      <g stroke="#f59e0b" stroke-width="3" stroke-linecap="round" opacity=".6">
+        <line x1="100" y1="20" x2="100" y2="35"/>
+        <line x1="100" y1="165" x2="100" y2="180"/>
+        <line x1="20" y1="100" x2="35" y2="100"/>
+        <line x1="165" y1="100" x2="180" y2="100"/>
+        <line x1="43" y1="43" x2="54" y2="54"/>
+        <line x1="146" y1="146" x2="157" y2="157"/>
+        <line x1="157" y1="43" x2="146" y2="54"/>
+        <line x1="54" y1="146" x2="43" y2="157"/>
+      </g>
+    </svg>`;
+  } else {
+    // Partly cloudy / Mist / Fog
+    animEl.classList.add('anim-partial');
+    animEl.innerHTML = '<div class="partial-sun"></div><div class="partial-cloud"></div>';
+  }
+}
+
+async function fetchWeather() {
+  try {
+    const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${OWM_CITY}&units=metric&lang=pt_br&appid=${OWM_KEY}`);
+    if (!res.ok) throw new Error('API error');
+    const d = await res.json();
+    const icon = d.weather[0].icon || '';
+    const isNight = icon.endsWith('n');
+    const code = d.weather[0].id;
+
+    tempEl.innerHTML = Math.round(d.main.temp) + '<small>°C</small>';
+    descEl.textContent = d.weather[0].description;
+    windEl.innerHTML = Math.round(d.wind.speed * 3.6) + '<small> km/h</small>';
+    humidityEl.innerHTML = d.main.humidity + '<small>%</small>';
+    visibilityEl.innerHTML = ((d.visibility || 10000) / 1000).toFixed(0) + '<small> km</small>';
+    pressureEl.innerHTML = d.main.pressure + '<small> hPa</small>';
+    updatedEl.textContent = 'Atualizado às ' + new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+
+    setWeatherAnim(code, isNight);
+    updateNews(code, d.visibility, d.wind.speed);
+  } catch (e) {
+    descEl.textContent = 'Dados indisponíveis';
+    updatedEl.textContent = 'Erro ao buscar clima — tentando novamente...';
+  }
+}
+const newsList = document.getElementById('newsList');
+function updateNews(code, vis, windSpeed) {
+  const items = [];
+  const wind = Math.round(windSpeed * 3.6);
+  const visKm = ((vis || 10000) / 1000).toFixed(0);
+
+  if (code >= 200 && code < 300) items.push({tag:'ALERTA', text:'Atividade elétrica na região — atenção redobrada'});
+  else if (code >= 300 && code < 600) items.push({tag:'METEO', text:'Precipitação na área — verifique condições antes do voo'});
+  else if (code === 800) items.push({tag:'SDAM', text:'Condições favoráveis para operação VFR no Aeroporto dos Amarais'});
+  else items.push({tag:'SDAM', text:'Nebulosidade na região — consulte METAR atualizado'});
+
+  if (wind > 30) items.push({tag:'VENTO', text:`Vento forte de ${wind} km/h — atenção nas operações de pátio`});
+  else items.push({tag:'INFO', text:'Pista principal em operação normal — sem restrições'});
+
+  if (visKm < 5) items.push({tag:'VIS', text:`Visibilidade reduzida (${visKm} km) — condições IMC possíveis`});
+
+  const hour = new Date().getHours();
+  if (hour >= 6 && hour < 12) items.push({tag:'BOM DIA', text:'Bom dia! A equipe Rotorwest deseja um excelente voo'});
+  else if (hour >= 12 && hour < 18) items.push({tag:'BOA TARDE', text:'Boa tarde! Estamos à disposição para qualquer necessidade'});
+  else items.push({tag:'BOA NOITE', text:'Boa noite! Operação noturna com apoio completo'});
+
+  newsList.innerHTML = items.map(i => `<div class="news-item"><span class="news-item-time">${i.tag}</span><span class="news-item-text">${i.text}</span></div>`).join('');
+}
+
+fetchWeather();
+setInterval(fetchWeather, WEATHER_INTERVAL);
+
+// WEBSOCKET
+const msgText = document.getElementById('msgText');
+const wsDot = document.getElementById('wsDot');
+const wsStatus = document.getElementById('wsStatus');
+const connLost = document.getElementById('connLost');
+let msgTimer = null;
+
+function wsConnect() {
+  const ws = new WebSocket(WS_URL);
+  ws.onopen = () => {
+    wsDot.style.background = '#4ade80';
+    wsStatus.textContent = 'Online';
+    connLost.classList.remove('show');
+  };
+  ws.onmessage = (e) => {
+    try {
+      const data = JSON.parse(e.data);
+      if (data.type === 'clear') {
+        showDefault();
+      } else if (data.type === 'message' && data.text) {
+        showMessage(data.text, data.duration || 30);
+      }
+    } catch {}
+  };
+  ws.onclose = () => {
+    wsDot.style.background = '#ef4444';
+    wsStatus.textContent = 'Offline';
+    connLost.classList.add('show');
+    setTimeout(wsConnect, 3000);
+  };
+  ws.onerror = () => ws.close();
+}
+
+const msgImg = document.getElementById('msgImg');
+
+function showMessage(text, duration) {
+  if (msgTimer) clearTimeout(msgTimer);
+  msgText.className = 'msg-text msg-active';
+  msgText.style.animation = 'none';
+  void msgText.offsetHeight;
+  msgText.style.animation = '';
+  msgText.innerHTML = text;
+  playChime();
+
+  if (text.toLowerCase().includes('pronto') || text.toLowerCase().includes('embarque')) {
+    msgImg.classList.add('show');
+  } else {
+    msgImg.classList.remove('show');
+  }
+
+  msgTimer = setTimeout(showDefault, duration * 1000);
+}
+
+function showDefault() {
+  if (msgTimer) { clearTimeout(msgTimer); msgTimer = null; }
+  msgText.className = 'msg-text msg-default';
+  msgText.style.animation = 'none';
+  void msgText.offsetHeight;
+  msgText.style.animation = '';
+  msgText.innerHTML = 'Bem-vindo à<br>Rotorwest';
+  msgImg.classList.remove('show');
+}
+
+wsConnect();
+</script>
+</body>
+</html>

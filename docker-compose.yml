@@ -1,0 +1,13 @@
+services:
+  websocket:
+    build: .
+    ports:
+      - "8080:8080"
+    restart: always
+  web:
+    image: nginx:alpine
+    ports:
+      - "8000:80"
+    volumes:
+      - .:/usr/share/nginx/html:ro
+    restart: always
