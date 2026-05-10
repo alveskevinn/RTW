@@ -73,7 +73,7 @@ body::before{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;
 .hero-media{position:absolute;inset:0;overflow:hidden}
 .hero-media::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(21,21,21,.35) 0%,rgba(21,21,21,.2) 25%,rgba(21,21,21,.55) 60%,rgba(21,21,21,.94) 82%,var(--dark) 100%);z-index:1}
 .hero-media::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 15% 75%,rgba(223,100,41,.18) 0%,transparent 55%),radial-gradient(ellipse at 100% 0%,rgba(0,0,0,.45) 0%,transparent 60%);z-index:2;pointer-events:none}
-.hero-media img{width:100%;height:100%;object-fit:cover;object-position:center 35%;animation:heroZoom 22s ease-in-out infinite alternate;will-change:transform}
+.hero-media img{width:100%;height:100%;object-fit:cover;object-position:65% 60%;animation:heroZoom 22s ease-in-out infinite alternate;will-change:transform}
 @keyframes heroZoom{from{transform:scale(1.03) translate3d(0,0,0)}to{transform:scale(1.1) translate3d(-1%,-1%,0)}}
 @media (prefers-reduced-motion:reduce){.hero-media img{animation:none;transform:scale(1.05)}}
 .skel{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;width:100%;height:100%;background:linear-gradient(135deg,#1e1e1e 0%,#2a2a2a 50%,#1e1e1e 100%);background-size:400% 400%;animation:shimmer 3s ease infinite;position:relative}
@@ -129,7 +129,7 @@ body::before{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;
 .svc-arrows{display:none}
 .nums{padding:64px 24px;position:relative;overflow:hidden}
 .nums::before{content:'';position:absolute;top:-100px;right:-100px;width:400px;height:400px;background:radial-gradient(circle,rgba(223,100,41,.06),transparent 70%);pointer-events:none}
-.nums-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:rgba(255,255,255,.04);border-radius:20px;overflow:hidden}
+.nums-grid{display:grid;grid-template-columns:1fr;gap:2px;background:rgba(255,255,255,.04);border-radius:20px;overflow:hidden}
 .num-i{background:var(--dark2);padding:32px 20px;text-align:center}
 .num-v{font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(36px,8vw,52px);font-weight:800;color:var(--fire);line-height:1}
 .num-v small{font-size:18px;font-weight:500;color:var(--ember)}
@@ -235,6 +235,7 @@ a.loc-row:active{transform:scale(.985)}
   .hero-btns{flex-direction:row;align-items:flex-start}
   .hero-trust{text-align:left}
   .hero{padding:0 48px 80px}
+  .hero-media img{object-position:center 35%}
   .hero-media::before{background:linear-gradient(180deg,rgba(21,21,21,.3) 0%,rgba(21,21,21,.15) 25%,rgba(21,21,21,.5) 60%,rgba(21,21,21,.92) 82%,var(--dark) 100%),linear-gradient(90deg,rgba(21,21,21,.88) 0%,rgba(21,21,21,.6) 30%,rgba(21,21,21,.2) 60%,transparent 85%)}
   .sec{padding:120px 48px}
   .svc-track{padding:0 48px 24px;scroll-padding-left:48px;gap:20px}
