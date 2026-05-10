@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rotorwest — Brand & Design System</title>
+<meta name="description" content="Guia oficial do sistema de design e identidade visual da Rotorwest Serviços Aéreos Especializados.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --fire:#df6429;
+  --ember:#b15329;
+  --dark:#151515;
+  --dark2:#1a1a1a;
+  --surface:#1e1e1e;
+  --text:#f0ece6;
+  --dim:#777;
+  --wsp:#25D366;
+  --light:#f5f2ed;
+  --light2:#eae6df;
+  --text-dark:#1a1a1a;
+  --dim-dark:#666;
+  --r:14px;
+  --page-max:1180px;
+  --rule:rgba(21,21,21,.08);
+  --rule-dark:rgba(240,236,230,.08);
+}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:'DM Sans',sans-serif;background:var(--light);color:var(--text-dark);-webkit-font-smoothing:antialiased;line-height:1.5}
+::selection{background:var(--fire);color:#fff}
+
+/* Noise overlay (mesmo do site) */
+body::before{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:.025;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+/* Page frame — cada "página" tem look editorial */
+.page{max-width:var(--page-max);margin:0 auto;padding:80px 64px;position:relative;border-bottom:1px solid var(--rule)}
+.page.dark{background:var(--dark);color:var(--text);max-width:none;padding-left:calc(50% - var(--page-max)/2 + 64px);padding-right:calc(50% - var(--page-max)/2 + 64px);border-bottom-color:var(--rule-dark)}
+.page:last-child{border-bottom:none}
+
+/* Editorial header de página */
+.page-head{display:flex;justify-content:space-between;align-items:flex-end;padding-bottom:40px;margin-bottom:48px;border-bottom:1px solid currentColor;border-color:var(--rule)}
+.page.dark .page-head{border-color:var(--rule-dark)}
+.page-num{font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--fire)}
+.page-meta{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim-dark);text-align:right}
+.page.dark .page-meta{color:var(--dim)}
+
+h1.display{font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(48px,8vw,96px);font-weight:800;line-height:.95;letter-spacing:-2px;margin-bottom:24px}
+h2.page-title{font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(36px,6vw,64px);font-weight:800;line-height:1;letter-spacing:-1.5px;margin-bottom:20px}
+h3.sec-title{font-family:'Plus Jakarta Sans',sans-serif;font-size:22px;font-weight:700;letter-spacing:-.3px;margin-bottom:18px}
+.lede{font-size:16px;line-height:1.7;color:var(--dim-dark);max-width:560px}
+.page.dark .lede{color:var(--dim)}
+.eyebrow{font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--fire);margin-bottom:18px;display:block}
+
+/* ==================== COVER ==================== */
+.cover{min-height:100vh;background:var(--dark);color:var(--text);display:flex;flex-direction:column;position:relative;overflow:visible;max-width:none;padding:0}
+.cover::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 20% 70%,rgba(223,100,41,.18) 0%,transparent 55%),radial-gradient(ellipse at 80% 20%,rgba(223,100,41,.08) 0%,transparent 50%);pointer-events:none}
+.cover-inner{max-width:var(--page-max);margin:0 auto;width:100%;padding:48px 64px;flex:1;display:flex;flex-direction:column;justify-content:space-between;position:relative;z-index:2}
+.cover-top{display:flex;justify-content:space-between;align-items:center;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--dim)}
+.cover-top .dot{width:8px;height:8px;border-radius:50%;background:var(--fire);display:inline-block;margin-right:10px;vertical-align:middle}
+.cover-center{display:grid;grid-template-columns:1fr;gap:48px;padding:80px 0}
+.cover-logo{height:80px;width:auto;margin-bottom:56px;opacity:.95}
+.cover-h{font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(56px,11vw,148px);font-weight:800;line-height:.9;letter-spacing:-4px;margin-bottom:32px}
+.cover-h span{display:inline-block;color:var(--fire);background:linear-gradient(135deg,var(--fire),var(--ember));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.cover-sub{font-size:17px;line-height:1.7;color:var(--dim);max-width:480px}
+.cover-bot{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;border-top:1px solid var(--rule-dark);padding-top:32px}
+.cover-bot .cb{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);font-family:'JetBrains Mono',monospace}
+.cover-bot .cb strong{display:block;font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;color:var(--text);margin-top:6px;letter-spacing:.5px;text-transform:none}
+
+/* ==================== TOC ==================== */
+.toc{display:grid;grid-template-columns:1fr;gap:0;margin-top:40px}
+.toc-row{display:grid;grid-template-columns:60px 1fr auto;align-items:center;gap:24px;padding:24px 0;border-top:1px solid var(--rule);transition:all .2s}
+.toc-row:last-child{border-bottom:1px solid var(--rule)}
+.toc-row:hover{background:rgba(223,100,41,.03)}
+.toc-n{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:2px;color:var(--fire);font-weight:500}
+.toc-t{font-family:'Plus Jakarta Sans',sans-serif;font-size:22px;font-weight:700;letter-spacing:-.3px}
+.toc-t small{display:block;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:400;color:var(--dim-dark);letter-spacing:0;margin-top:4px}
+.toc-p{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--dim-dark);letter-spacing:1px}
+
+/* ==================== LOGO PAGE ==================== */
+.logo-showcase{display:grid;grid-template-columns:1.4fr 1fr;gap:48px;align-items:stretch}
+.logo-hero{background:var(--dark);border-radius:20px;aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.logo-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(223,100,41,.12),transparent 60%)}
+.logo-hero img{max-width:55%;max-height:55%;position:relative;z-index:1}
+.logo-hero .guides{position:absolute;inset:0;pointer-events:none}
+.logo-hero .guides::before,.logo-hero .guides::after{content:'';position:absolute;background:rgba(223,100,41,.15)}
+.logo-hero .guides::before{left:50%;top:0;bottom:0;width:1px}
+.logo-hero .guides::after{top:50%;left:0;right:0;height:1px}
+.logo-hero .corner{position:absolute;width:14px;height:14px;border:1px solid rgba(223,100,41,.3)}
+.logo-hero .c1{top:24px;left:24px;border-right:0;border-bottom:0}
+.logo-hero .c2{top:24px;right:24px;border-left:0;border-bottom:0}
+.logo-hero .c3{bottom:24px;left:24px;border-right:0;border-top:0}
+.logo-hero .c4{bottom:24px;right:24px;border-left:0;border-top:0}
+.logo-variants{display:grid;grid-template-rows:1fr 1fr;gap:16px}
+.logo-variant{border-radius:16px;display:flex;align-items:center;justify-content:center;padding:32px;position:relative}
+.logo-variant img{max-width:70%;max-height:80%}
+.logo-variant.dark{background:var(--dark)}
+.logo-variant.light{background:#fff;border:1px solid var(--rule)}
+.logo-variant .tag{position:absolute;top:14px;left:14px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;padding:4px 10px;border-radius:100px;background:rgba(0,0,0,.5);color:#fff}
+.logo-variant.light .tag{background:rgba(0,0,0,.06);color:var(--text-dark)}
+
+.logo-specs{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:48px;padding-top:40px;border-top:1px solid var(--rule)}
+.logo-spec{}
+.logo-spec .sp-label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--fire);margin-bottom:8px}
+.logo-spec h4{font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:700;margin-bottom:6px}
+.logo-spec p{font-size:13px;color:var(--dim-dark);line-height:1.6}
+
+/* ==================== COLOR PAGE ==================== */
+.palette{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:16px}
+.swatch{border-radius:20px;overflow:hidden;display:flex;flex-direction:column;min-height:260px}
+.swatch .sw-top{flex:1;position:relative;padding:24px;display:flex;flex-direction:column;justify-content:space-between}
+.swatch .sw-name{font-family:'Plus Jakarta Sans',sans-serif;font-size:24px;font-weight:700;letter-spacing:-.3px}
+.swatch .sw-role{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;opacity:.7}
+.swatch .sw-bot{padding:18px 24px;background:rgba(0,0,0,.25);font-family:'JetBrains Mono',monospace;font-size:11px;line-height:1.8;letter-spacing:.5px}
+.swatch .sw-bot div{display:flex;justify-content:space-between;gap:16px}
+.swatch .sw-bot span:first-child{opacity:.6}
+.swatch.on-light .sw-bot{background:rgba(0,0,0,.06);color:var(--text-dark)}
+.swatch.primary{background:var(--fire);color:#fff;grid-column:span 1;grid-row:span 2;min-height:536px}
+.swatch.primary .sw-name{font-size:36px}
+.swatch.ember{background:var(--ember);color:#fff}
+.swatch.dark-sw{background:var(--dark);color:var(--text)}
+.swatch.dark2-sw{background:var(--dark2);color:var(--text)}
+.swatch.surface{background:var(--surface);color:var(--text)}
+.swatch.light{background:var(--light);color:var(--text-dark);border:1px solid var(--rule)}
+.swatch.light .sw-bot{background:rgba(0,0,0,.04)}
+.swatch.light2{background:var(--light2);color:var(--text-dark);border:1px solid var(--rule)}
+.swatch.light2 .sw-bot{background:rgba(0,0,0,.04)}
+.swatch.wsp{background:var(--wsp);color:#fff}
+
+.color-ratios{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:40px;padding-top:32px;border-top:1px solid var(--rule)}
+.ratio{padding:20px;border:1px solid var(--rule);border-radius:14px;background:#fff}
+.ratio .r-swatch{height:48px;border-radius:8px;margin-bottom:14px;display:flex;align-items:center;justify-content:center;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:14px;letter-spacing:1px}
+.ratio .r-label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim-dark);margin-bottom:4px}
+.ratio .r-val{font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:600}
+
+/* ==================== TYPOGRAPHY PAGE ==================== */
+.type-specimen{margin-bottom:64px;padding-bottom:56px;border-bottom:1px solid var(--rule-dark)}
+.type-specimen:last-child{border-bottom:none;padding-bottom:0;margin-bottom:0}
+.ts-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:40px;flex-wrap:wrap;gap:16px}
+.ts-name{font-family:'Plus Jakarta Sans',sans-serif;font-size:56px;font-weight:800;letter-spacing:-1.5px;line-height:1}
+.ts-name.dm{font-family:'DM Sans',sans-serif;font-weight:700;letter-spacing:-1px}
+.ts-meta{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);text-align:right;line-height:2}
+.ts-meta strong{color:var(--text)}
+
+.glyph-row{font-size:52px;line-height:1.15;letter-spacing:-1px;margin-bottom:32px;word-break:break-word}
+.glyph-row.jakarta{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800}
+.glyph-row.dm{font-family:'DM Sans',sans-serif;font-weight:500}
+
+.weight-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px 48px}
+.weight-row{display:flex;justify-content:space-between;align-items:baseline;padding:14px 0;border-top:1px solid var(--rule-dark)}
+.weight-label{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:1.5px;color:var(--dim);text-transform:uppercase}
+.weight-sample{font-size:22px;letter-spacing:-.3px}
+.weight-sample.jakarta{font-family:'Plus Jakarta Sans',sans-serif}
+.weight-sample.dm{font-family:'DM Sans',sans-serif}
+
+/* Scale */
+.scale-table{width:100%;margin-top:24px}
+.scale-row{display:grid;grid-template-columns:120px 80px 1fr;gap:24px;align-items:baseline;padding:22px 0;border-top:1px solid var(--rule-dark)}
+.scale-row:last-child{border-bottom:1px solid var(--rule-dark)}
+.scale-tag{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--fire);font-weight:500}
+.scale-size{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--dim)}
+.scale-sample{font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;letter-spacing:-.5px;line-height:1.1}
+
+/* ==================== BUTTONS ==================== */
+.btn-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.btn-cell{background:var(--surface);border:1px solid var(--rule-dark);border-radius:16px;padding:32px 24px 24px;display:flex;flex-direction:column;gap:20px}
+.btn-cell .bc-tag{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--fire)}
+.btn-cell .bc-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-size:14px;font-weight:600;padding:16px 28px;border-radius:100px;border:none;cursor:pointer;font-family:'DM Sans',sans-serif}
+.bc-btn.f{background:var(--fire);color:#fff}
+.bc-btn.g{background:rgba(255,255,255,.05);color:var(--text);border:1px solid rgba(255,255,255,.1)}
+.bc-btn.w{background:var(--wsp);color:#fff}
+.bc-btn.sm{font-size:12px;padding:10px 22px;letter-spacing:.8px;text-transform:uppercase}
+.bc-btn svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2}
+.bc-specs{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--dim);line-height:1.8;letter-spacing:.5px}
+.bc-specs span{color:var(--text)}
+
+/* ==================== COMPONENTS ==================== */
+.comp-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:32px}
+.comp{background:var(--surface);border:1px solid var(--rule-dark);border-radius:20px;padding:32px;position:relative}
+.comp .cp-tag{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--fire);margin-bottom:20px;display:block}
+
+/* Tag pill */
+.demo-tag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--fire);background:rgba(223,100,41,.1);padding:5px 14px;border-radius:100px}
+.demo-tags{display:flex;gap:8px;flex-wrap:wrap}
+
+/* Trust item */
+.demo-trust{display:flex;gap:0}
+.demo-trust .ti{flex:1;text-align:center;padding:20px 16px;border-right:1px solid rgba(255,255,255,.06)}
+.demo-trust .ti:last-child{border-right:none}
+.demo-trust .ti::before{content:'';display:block;width:20px;height:2px;background:var(--fire);margin:0 auto 10px;border-radius:2px}
+.demo-trust strong{display:block;font-size:13px;font-weight:600;color:var(--text)}
+.demo-trust small{font-size:11px;color:var(--dim)}
+
+/* Num card */
+.demo-num{background:var(--dark2);border-radius:14px;padding:28px 20px;text-align:center}
+.demo-num .nv{font-family:'Plus Jakarta Sans',sans-serif;font-size:44px;font-weight:800;color:var(--fire);line-height:1}
+.demo-num .nl{font-size:12px;color:var(--dim);margin-top:6px}
+
+/* Feat card */
+.demo-feat{padding:20px;background:var(--dark2);border-radius:14px;border-left:3px solid var(--fire)}
+.demo-feat strong{display:block;font-size:14px;font-weight:600;margin-bottom:4px;color:var(--text)}
+.demo-feat span{font-size:12px;color:var(--dim)}
+
+/* ==================== ICONS ==================== */
+.icon-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
+.icon-cell{aspect-ratio:1;background:var(--surface);border:1px solid var(--rule-dark);border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:16px;transition:all .2s}
+.icon-cell:hover{border-color:var(--fire);transform:translateY(-2px)}
+.icon-cell svg{width:26px;height:26px;stroke:var(--fire);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.icon-cell span{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:1px;color:var(--dim);text-transform:uppercase;text-align:center}
+
+/* ==================== SPACING ==================== */
+.space-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:48px}
+.space-col h4{font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--fire);margin-bottom:20px}
+.space-row{display:grid;grid-template-columns:80px 1fr auto;gap:20px;align-items:center;padding:14px 0;border-top:1px solid var(--rule)}
+.space-row:last-child{border-bottom:1px solid var(--rule)}
+.space-label{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--fire);letter-spacing:1px}
+.space-bar{height:8px;background:var(--fire);border-radius:4px}
+.space-val{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--dim-dark)}
+
+.radius-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:24px}
+.radius-cell{aspect-ratio:1;background:var(--fire);display:flex;align-items:flex-end;padding:16px;color:#fff;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:1px}
+.radius-cell.r8{border-radius:8px}
+.radius-cell.r14{border-radius:14px}
+.radius-cell.r20{border-radius:20px}
+.radius-cell.r100{border-radius:100px}
+
+/* ==================== VOICE & TONE ==================== */
+.voice-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-top:32px}
+.voice-col{padding:40px}
+.voice-col.do{background:rgba(223,100,41,.06);border-radius:20px 0 0 20px;border:1px solid rgba(223,100,41,.15);border-right:0}
+.voice-col.dont{background:#fff;border-radius:0 20px 20px 0;border:1px solid var(--rule)}
+.voice-col h4{font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:700;letter-spacing:3px;text-transform:uppercase;margin-bottom:24px;display:flex;align-items:center;gap:10px}
+.voice-col.do h4{color:var(--fire)}
+.voice-col.dont h4{color:#999}
+.voice-col h4 .dot{width:8px;height:8px;border-radius:50%;background:currentColor;display:inline-block}
+.voice-col ul{list-style:none;display:flex;flex-direction:column;gap:14px}
+.voice-col li{font-size:14px;line-height:1.6;padding-left:22px;position:relative;color:var(--text-dark)}
+.voice-col li::before{position:absolute;left:0;top:0;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800}
+.voice-col.do li::before{content:'+';color:var(--fire)}
+.voice-col.dont li::before{content:'−';color:#bbb}
+
+/* ==================== FOOTER PAGE ==================== */
+.endcard{background:var(--dark);color:var(--text);padding:120px 64px;text-align:center;max-width:none;position:relative;overflow:visible}
+.endcard::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(223,100,41,.12),transparent 60%)}
+.endcard-inner{position:relative;max-width:640px;margin:0 auto}
+.endcard-logo{height:120px;width:auto;margin:0 auto 48px;opacity:.95;display:block;max-width:90%;object-fit:contain}
+.endcard .eh{font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(40px,6vw,64px);font-weight:800;line-height:1;letter-spacing:-1.5px;margin-bottom:24px}
+.endcard .eh span{display:inline-block;color:var(--fire);background:linear-gradient(135deg,var(--fire),var(--ember));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.endcard p{color:var(--dim);max-width:440px;margin:0 auto 40px;line-height:1.7}
+.endcard .colofon{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:64px;padding-top:40px;border-top:1px solid var(--rule-dark);text-align:left}
+.endcard .colofon div{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim)}
+.endcard .colofon strong{display:block;font-family:'Plus Jakarta Sans',sans-serif;color:var(--text);margin-top:6px;font-size:13px;letter-spacing:.5px;text-transform:none}
+
+/* ==================== POST-IT ==================== */
+.postit{
+  position:absolute;
+  font-family:'Caveat',cursive;
+  font-size:19px;
+  font-weight:600;
+  line-height:1.25;
+  color:#1a1a1a;
+  padding:20px 22px 22px;
+  width:210px;
+  background:#fef3a2;
+  box-shadow:none;
+  transform:rotate(-3.2deg);
+  z-index:20;
+  border-radius:2px;
+  background-image:linear-gradient(135deg,transparent 0%,transparent 96%,rgba(0,0,0,.1) 100%);
+}
+.postit::before{
+  content:'';
+  position:absolute;
+  top:-10px;left:50%;
+  width:72px;height:20px;
+  transform:translateX(-50%) rotate(-4deg);
+  background:rgba(255,255,255,.55);
+  border:none;
+  box-shadow:none;
+}
+.postit.peach{background:#fecba8;transform:rotate(2.4deg)}
+.postit.mint{background:#c5f0c9;transform:rotate(-1.8deg)}
+.postit.pink{background:#fbc9d3;transform:rotate(3.6deg)}
+.postit.orange{background:#ffd59a;transform:rotate(-4deg)}
+.postit .sig{display:block;font-size:14px;color:#777;margin-top:8px;font-weight:500}
+.postit em{font-style:italic;color:#b15329;font-weight:700}
+.postit u{text-decoration:underline wavy var(--fire);text-underline-offset:3px}
+
+/* ==================== RESPONSIVE ==================== */
+@media screen and (max-width:900px){
+  .page{padding:56px 32px}
+  .page.dark{padding-left:32px;padding-right:32px}
+  .cover-inner{padding:40px 32px}
+  .cover-center{padding:48px 0}
+  .cover-bot{grid-template-columns:repeat(2,1fr);gap:20px}
+  .logo-showcase{grid-template-columns:1fr}
+  .logo-specs{grid-template-columns:1fr}
+  .palette{grid-template-columns:1fr}
+  .swatch.primary{grid-row:span 1;min-height:260px}
+  .color-ratios{grid-template-columns:repeat(2,1fr)}
+  .btn-grid{grid-template-columns:1fr}
+  .comp-grid{grid-template-columns:1fr}
+  .icon-grid{grid-template-columns:repeat(3,1fr)}
+  .space-grid{grid-template-columns:1fr;gap:32px}
+  .weight-grid{grid-template-columns:1fr;gap:0}
+  .voice-grid{grid-template-columns:1fr}
+  .voice-col.do{border-radius:20px 20px 0 0;border:1px solid rgba(223,100,41,.15);border-bottom:0}
+  .voice-col.dont{border-radius:0 0 20px 20px}
+  .ts-name{font-size:40px}
+  .glyph-row{font-size:38px}
+  .scale-row{grid-template-columns:80px 1fr;gap:12px}
+  .scale-size{display:none}
+  .toc-row{grid-template-columns:40px 1fr;gap:16px}
+  .toc-p{display:none}
+  .endcard .colofon{grid-template-columns:1fr}
+}
+
+@media print{
+  @page{size:A4 portrait;margin:0}
+  html,body{margin:0;padding:0;background:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact;color-adjust:exact}
+  body::before{display:none}
+  *,*::before,*::after{-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important}
+  html{width:210mm}
+  body{width:210mm;min-width:210mm}
+
+  .page,.cover,.endcard{
+    width:210mm;height:297mm;
+    min-width:210mm;
+    padding:16mm 18mm;
+    margin:0;
+    max-width:none;
+    page-break-after:always;
+    page-break-inside:avoid;
+    break-after:page;
+    overflow:hidden;
+    box-sizing:border-box;
+    border-bottom:none !important;
+    min-height:0;
+    display:block;
+  }
+  .page.dark{padding:16mm 18mm}
+
+  /* Cover */
+  .cover{padding:0;background:var(--dark)}
+  .cover-inner{width:210mm;height:297mm;padding:18mm 20mm;box-sizing:border-box;flex:none;display:flex;flex-direction:column;justify-content:space-between}
+  .cover-center{padding:28px 0;display:block}
+  .cover-logo{height:52px;margin-bottom:36px}
+  .cover-h{font-size:96px;letter-spacing:-3px;margin-bottom:22px;line-height:.9}
+  .cover-sub{font-size:13px;max-width:380px;line-height:1.65}
+  .cover-top{font-size:10px}
+  .cover-bot{padding-top:22px;gap:18px}
+  .cover-bot .cb{font-size:9px}
+  .cover-bot .cb strong{font-size:12px}
+
+  /* Shared page adjustments */
+  .page-head{padding-bottom:22px;margin-bottom:28px}
+  h1.display,h2.page-title{font-size:48px;letter-spacing:-1.2px}
+  h3.sec-title{font-size:16px;margin-bottom:14px}
+  .lede{font-size:12.5px;line-height:1.6;max-width:520px}
+  .page-meta{font-size:9px;line-height:1.8}
+  .page-num{font-size:10px;letter-spacing:3px}
+  .eyebrow{font-size:9px;letter-spacing:3px}
+
+  /* TOC */
+  .toc{margin-top:24px}
+  .toc-row{padding:14px 0;grid-template-columns:44px 1fr auto;gap:18px}
+  .toc-row:hover{background:transparent}
+  .toc-t{font-size:16px}
+  .toc-t small{font-size:10.5px;margin-top:3px}
+  .toc-n,.toc-p{font-size:9px}
+  /* Chrome injeta estilo padrão de <a> no print — força preto, sem sublinhado, mantém clicável */
+  a,a:visited,a:link,a:hover,a:active{color:inherit !important;text-decoration:none !important}
+  a.toc-row{color:var(--text-dark) !important;text-decoration:none !important}
+  a.toc-row *{text-decoration:none !important;color:inherit !important}
+  a.toc-row .toc-n{color:var(--fire) !important}
+  a.toc-row .toc-p{color:var(--dim-dark) !important}
+  a.toc-row .toc-t small{color:var(--dim-dark) !important;text-decoration:none !important}
+
+  /* Logo page */
+  .logo-showcase{gap:20px}
+  .logo-hero{aspect-ratio:auto;height:220px;border-radius:14px}
+  .logo-hero img{max-width:48%;max-height:48%}
+  .logo-variants{gap:10px}
+  .logo-variant{padding:16px;border-radius:12px}
+  .logo-variant .tag{font-size:8px;padding:3px 8px}
+  .logo-specs{margin-top:24px;padding-top:20px;gap:18px}
+  .logo-spec .sp-label{font-size:8.5px;letter-spacing:1.6px;margin-bottom:6px}
+  .logo-spec h4{font-size:12.5px;margin-bottom:4px}
+  .logo-spec p{font-size:10.5px;line-height:1.55}
+
+  /* Colors */
+  .palette{gap:8px;grid-template-columns:1.2fr 1fr 1fr}
+  .swatch{min-height:118px;border-radius:14px}
+  .swatch.primary{min-height:244px;grid-row:span 2}
+  .swatch .sw-top{padding:14px}
+  .swatch .sw-name{font-size:18px}
+  .swatch.primary .sw-name{font-size:28px}
+  .swatch .sw-role{font-size:8px;letter-spacing:1.6px}
+  .swatch .sw-bot{padding:10px 14px;font-size:9px;line-height:1.65;letter-spacing:.3px}
+  .color-ratios{margin-top:20px;padding-top:18px;gap:10px}
+  .ratio{padding:12px;border-radius:10px}
+  .ratio .r-swatch{height:34px;margin-bottom:8px;font-size:12px}
+  .ratio .r-label{font-size:8.5px;margin-bottom:3px}
+  .ratio .r-val{font-size:10.5px}
+
+  /* Typography — dense */
+  .type-specimen{margin-bottom:20px;padding-bottom:18px}
+  .ts-head{margin-bottom:14px;align-items:center}
+  .ts-name{font-size:32px;letter-spacing:-1px}
+  .ts-meta{font-size:8.5px;letter-spacing:1.6px;line-height:1.7}
+  .glyph-row{font-size:20px;margin-bottom:10px;line-height:1.2;letter-spacing:-.4px}
+  .type-specimen .sec-title{font-size:11px;margin-top:14px !important;margin-bottom:8px;letter-spacing:2px;text-transform:uppercase;color:var(--fire) !important}
+  .weight-grid{gap:4px 24px}
+  .weight-row{padding:5px 0}
+  .weight-label{font-size:8.5px;letter-spacing:1.4px}
+  .weight-sample{font-size:14px;letter-spacing:-.2px}
+  .scale-table{margin-top:8px}
+  .scale-row{padding:6px 0;grid-template-columns:80px 70px 1fr;gap:14px}
+  .scale-tag{font-size:8.5px;letter-spacing:1.6px}
+  .scale-size{font-size:9px}
+  .scale-row .scale-sample{font-size:16px !important;line-height:1.1}
+  .scale-row:nth-child(1) .scale-sample{font-size:30px !important}
+  .scale-row:nth-child(2) .scale-sample{font-size:24px !important}
+  .scale-row:nth-child(3) .scale-sample{font-size:20px !important}
+  .scale-row:nth-child(4) .scale-sample{font-size:16px !important}
+  .scale-row:nth-child(5) .scale-sample{font-size:13px !important;font-weight:400 !important}
+  .scale-row:nth-child(6) .scale-sample{font-size:11px !important;font-weight:500 !important}
+  .scale-row:nth-child(7) .scale-sample{font-size:9px !important}
+
+  /* Buttons */
+  .btn-grid{gap:12px}
+  .btn-cell{padding:18px 14px 14px;border-radius:12px;gap:14px}
+  .bc-tag{font-size:8.5px;letter-spacing:1.6px}
+  .bc-btn{padding:11px 20px;font-size:11px}
+  .bc-btn.sm{font-size:9px;padding:7px 14px;letter-spacing:.6px}
+  .bc-btn svg{width:13px;height:13px}
+  .bc-specs{font-size:9px;line-height:1.7}
+
+  /* Components */
+  .comp-grid{gap:16px}
+  .comp{padding:20px;border-radius:14px}
+  .cp-tag{font-size:8.5px;margin-bottom:14px;letter-spacing:1.6px}
+  .demo-tag{font-size:9px;padding:4px 11px;letter-spacing:1.6px}
+  .demo-trust strong{font-size:12px}
+  .demo-trust small{font-size:10px}
+  .demo-trust .ti{padding:14px 10px}
+  .demo-trust .ti::before{width:16px;margin-bottom:7px}
+  .demo-num{padding:18px 12px;border-radius:10px}
+  .demo-num .nv{font-size:32px}
+  .demo-num .nl{font-size:10px;margin-top:4px}
+  .demo-feat{padding:12px;border-radius:10px}
+  .demo-feat strong{font-size:12px}
+  .demo-feat span{font-size:10.5px}
+
+  /* Icons */
+  .icon-grid{gap:8px}
+  .icon-cell{padding:10px;border-radius:10px;gap:6px}
+  .icon-cell svg{width:22px;height:22px}
+  .icon-cell span{font-size:8px;letter-spacing:.8px}
+
+  /* Spacing */
+  .space-grid{gap:28px}
+  .space-col h4{font-size:11px;margin-bottom:12px;letter-spacing:1.8px}
+  .space-row{padding:7px 0;grid-template-columns:50px 1fr auto;gap:10px}
+  .space-label{font-size:9px}
+  .space-val{font-size:9px}
+  .radius-grid{gap:10px;margin-top:12px}
+  .radius-cell{font-size:9px;padding:12px}
+  .space-col>div[style*="background:rgba"]{padding:14px !important;margin-top:20px !important}
+  .space-col>div[style*="background:rgba"] div{font-size:9.5px !important}
+
+  /* Voice */
+  .voice-grid{margin-top:20px}
+  .voice-col{padding:24px}
+  .voice-col h4{font-size:10.5px;letter-spacing:2.4px;margin-bottom:16px}
+  .voice-col ul{gap:10px}
+  .voice-col li{font-size:11.5px;line-height:1.55;padding-left:18px}
+
+  /* Endcard — mirrors cover layout */
+  .endcard{padding:0;background:var(--dark);text-align:left}
+  .endcard-inner{padding:22mm 20mm;max-width:none;width:210mm;height:297mm;display:flex;flex-direction:column;justify-content:flex-start;box-sizing:border-box;text-align:left}
+  .endcard-logo{height:96px !important;width:auto !important;max-width:none !important;margin:30mm 0 36px 0 !important;opacity:.95;display:block;object-fit:contain}
+  .endcard .eh{font-size:82px;letter-spacing:-2.5px;margin-bottom:22px;line-height:.92;text-align:left}
+  .endcard p{font-size:13px;max-width:380px;margin:0;text-align:left;line-height:1.65;color:var(--dim)}
+  .endcard .colofon{margin-top:auto;padding-top:22px;gap:18px;text-align:left;grid-template-columns:repeat(3,1fr) !important;display:grid !important;border-top:1px solid var(--rule-dark)}
+  .endcard .colofon div{font-size:9px;letter-spacing:1.8px}
+  .endcard .colofon strong{font-size:11.5px;margin-top:4px}
+
+  /* Kill animations on reveal/hover/transform */
+  *{animation:none !important;transition:none !important}
+
+  /* Post-it no print — levemente menor pra não invadir o grid */
+  .postit{font-size:15px;width:170px;padding:14px 16px 16px;box-shadow:none !important}
+  .postit .sig{font-size:12px;margin-top:6px}
+  .postit::before{width:54px;height:14px;top:-7px}
+
+  /* Mobile Chrome quebra background-clip:text — força fallback sólido */
+  .cover-h span,.endcard .eh span{
+    background:none !important;
+    -webkit-background-clip:border-box !important;
+    background-clip:border-box !important;
+    -webkit-text-fill-color:var(--fire) !important;
+    color:var(--fire) !important;
+  }
+
+  /* FORÇA grids multi-coluna voltarem (A4 = ~794px, dispara breakpoint 900px) */
+  .logo-showcase{grid-template-columns:1.4fr 1fr !important}
+  .logo-specs{grid-template-columns:repeat(3,1fr) !important}
+  .palette{grid-template-columns:1.2fr 1fr 1fr !important}
+  .color-ratios{grid-template-columns:repeat(4,1fr) !important}
+  .btn-grid{grid-template-columns:repeat(3,1fr) !important}
+  .comp-grid{grid-template-columns:repeat(2,1fr) !important}
+  .icon-grid{grid-template-columns:repeat(6,1fr) !important}
+  .space-grid{grid-template-columns:1fr 1fr !important;gap:24px !important}
+  .weight-grid{grid-template-columns:repeat(2,1fr) !important;gap:4px 24px !important}
+  .voice-grid{grid-template-columns:1fr 1fr !important}
+  .voice-col.do{border-radius:20px 0 0 20px !important;border:1px solid rgba(223,100,41,.15) !important;border-right:0 !important}
+  .voice-col.dont{border-radius:0 20px 20px 0 !important;border:1px solid var(--rule) !important}
+  .swatch.primary{grid-row:span 2 !important;min-height:244px !important}
+  .ts-name{font-size:32px !important}
+  .glyph-row{font-size:20px !important}
+  .scale-row{grid-template-columns:80px 70px 1fr !important;gap:14px !important}
+  .scale-size{display:block !important}
+  .toc-row{grid-template-columns:44px 1fr auto !important}
+  .toc-p{display:block !important}
+  .endcard .colofon{grid-template-columns:repeat(3,1fr) !important}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ COVER ============ -->
+<section class="cover">
+  <div class="cover-inner">
+    <div class="cover-top">
+      <span><span class="dot"></span>Brand Guidelines</span>
+      <span>Vol. 01 · 2026</span>
+    </div>
+
+    <div class="cover-center">
+      <img src="logo.svg" alt="Rotorwest" class="cover-logo">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--fire);margin-bottom:20px">Brand & Design System</div>
+        <h1 class="cover-h">Identidade<br><span>visual.</span></h1>
+        <p class="cover-sub">Guia oficial de marca, tipografia, cores e componentes da Rotorwest — hangaragem, FBO e serviços aéreos especializados no Aeroporto dos Amarais, Campinas.</p>
+      </div>
+    </div>
+
+    <div class="cover-bot">
+      <div class="cb">Edição<strong>v1.0 · 2026</strong></div>
+      <div class="cb">Autoria<strong>Kevin Pedroso @ Devskin Studio</strong></div>
+      <div class="cb">Cliente<strong>Rotorwest SAE</strong></div>
+      <div class="cb">Categoria<strong>Aviação · FBO</strong></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TOC / INTRO ============ -->
+<section class="page">
+  <div class="postit" style="top:260px;right:40px">
+    pensar em adicionar uma seção sobre <u>fotografia</u> numa próxima versão
+    <span class="sig">— Kevin</span>
+  </div>
+  <div class="page-head">
+    <div>
+      <span class="page-num">00 · Índice</span>
+      <h2 class="page-title">Sumário</h2>
+    </div>
+    <div class="page-meta">
+      Rotorwest<br>Design System / 2026
+    </div>
+  </div>
+  <p class="lede" style="margin-bottom:40px">Este documento define os fundamentos visuais e verbais da marca. Ele serve como referência única para designers, desenvolvedores e parceiros que produzem material em nome da Rotorwest.</p>
+
+  <div class="toc">
+    <a href="#logo" class="toc-row">
+      <span class="toc-n">01</span>
+      <div class="toc-t">Logo e Marca<small>Construção, variações, área de respiro e usos incorretos.</small></div>
+      <span class="toc-p">p. 03</span>
+    </a>
+    <a href="#colors" class="toc-row">
+      <span class="toc-n">02</span>
+      <div class="toc-t">Paleta de Cores<small>Cores primárias, neutras e semânticas. Hex, RGB e aplicação.</small></div>
+      <span class="toc-p">p. 04</span>
+    </a>
+    <a href="#type" class="toc-row">
+      <span class="toc-n">03</span>
+      <div class="toc-t">Tipografia<small>Plus Jakarta Sans e DM Sans — pesos, escala e hierarquia.</small></div>
+      <span class="toc-p">p. 05</span>
+    </a>
+    <a href="#buttons" class="toc-row">
+      <span class="toc-n">04</span>
+      <div class="toc-t">Botões<small>Primário, ghost, WhatsApp. Estados e variações.</small></div>
+      <span class="toc-p">p. 06</span>
+    </a>
+    <a href="#components" class="toc-row">
+      <span class="toc-n">05</span>
+      <div class="toc-t">Componentes<small>Tags, cards numéricos, indicadores de confiança e features.</small></div>
+      <span class="toc-p">p. 07</span>
+    </a>
+    <a href="#icons" class="toc-row">
+      <span class="toc-n">06</span>
+      <div class="toc-t">Iconografia<small>Estilo outline 1.6px, 24 × 24, cantos arredondados.</small></div>
+      <span class="toc-p">p. 08</span>
+    </a>
+    <a href="#spacing" class="toc-row">
+      <span class="toc-n">07</span>
+      <div class="toc-t">Espaçamento & Raio<small>Escala de 4px, cantos suaves, grid base 8.</small></div>
+      <span class="toc-p">p. 09</span>
+    </a>
+    <a href="#voice" class="toc-row">
+      <span class="toc-n">08</span>
+      <div class="toc-t">Voz & Tom<small>Como escrevemos — direto, técnico, confiável.</small></div>
+      <span class="toc-p">p. 10</span>
+    </a>
+  </div>
+</section>
+
+<!-- ============ LOGO ============ -->
+<section class="page" id="logo">
+  <div class="postit orange" style="top:420px;right:48px;max-width:200px">
+    versão <u>.svg vetorial</u> prioridade — PNG perde nitidez em ampliações grandes
+    <span class="sig">— Kevin</span>
+  </div>
+  <div class="page-head">
+    <div>
+      <span class="page-num">01 · Logo</span>
+      <h2 class="page-title">Marca.</h2>
+    </div>
+    <div class="page-meta">Construção<br>& aplicações</div>
+  </div>
+  <p class="lede" style="margin-bottom:56px">A marca Rotorwest é apresentada em sua versão horizontal com o wordmark. Preserve sempre a área de respiro mínima equivalente à altura da letra "R" em todos os lados.</p>
+
+  <div class="logo-showcase">
+    <div class="logo-hero">
+      <span class="corner c1"></span><span class="corner c2"></span><span class="corner c3"></span><span class="corner c4"></span>
+      <div class="guides"></div>
+      <img src="logo-white.svg" alt="Rotorwest logo">
+    </div>
+    <div class="logo-variants">
+      <div class="logo-variant dark">
+        <span class="tag">Fundo escuro · preferencial</span>
+        <img src="logo-white.svg" alt="">
+      </div>
+      <div class="logo-variant light">
+        <span class="tag">Fundo claro</span>
+        <img src="logo.svg" alt="">
+      </div>
+    </div>
+  </div>
+
+  <div class="logo-specs">
+    <div class="logo-spec">
+      <div class="sp-label">01 · Tamanho mínimo</div>
+      <h4>Digital 36 px · Impresso 12 mm</h4>
+      <p>Abaixo destes limites a legibilidade do wordmark é comprometida. Utilize somente em aplicações onde a assinatura possa ser lida com conforto.</p>
+    </div>
+    <div class="logo-spec">
+      <div class="sp-label">02 · Área de respiro</div>
+      <h4>Margem = altura do "R"</h4>
+      <p>Nenhum elemento gráfico — texto, imagem ou borda — deve invadir o espaço equivalente a uma altura de caractere ao redor do logo.</p>
+    </div>
+    <div class="logo-spec">
+      <div class="sp-label">03 · Fundo</div>
+      <h4>Preferencial em escuro</h4>
+      <p>A marca nasceu pensada para o dark mode (#151515). Aplicações em fundo claro devem usar versão monocromática preta ou o laranja institucional.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ COLORS ============ -->
+<section class="page" id="colors">
+  <div class="postit pink" style="top:240px;right:56px;max-width:210px">
+    esse tom de <em>Fire</em> casou bem com o pôr-do-sol do hangar. tom definitivo.
+    <span class="sig">— Kevin</span>
+  </div>
+  <div class="page-head">
+    <div>
+      <span class="page-num">02 · Cores</span>
+      <h2 class="page-title">Paleta.</h2>
+    </div>
+    <div class="page-meta">9 tokens<br>1 primária</div>
+  </div>
+  <p class="lede" style="margin-bottom:56px">A paleta é construída em torno do <strong style="color:var(--fire)">laranja Fire</strong> — referência ao pôr-do-sol sobre o hangar — equilibrada por neutros quentes em dois polos (dark cinematográfico e off-white editorial).</p>
+
+  <div class="palette">
+    <div class="swatch primary">
+      <div class="sw-top">
+        <div>
+          <div class="sw-role">Primária · Call to action</div>
+        </div>
+        <div>
+          <div class="sw-name">Fire</div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;opacity:.8;margin-top:8px">Identidade · botões · highlights</div>
+        </div>
+      </div>
+      <div class="sw-bot">
+        <div><span>HEX</span><span>#DF6429</span></div>
+        <div><span>RGB</span><span>223 · 100 · 41</span></div>
+        <div><span>HSL</span><span>19° · 73% · 52%</span></div>
+        <div><span>CMYK</span><span>0 · 55 · 82 · 13</span></div>
+        <div><span>Var</span><span>--fire</span></div>
+      </div>
+    </div>
+
+    <div class="swatch ember">
+      <div class="sw-top">
+        <div class="sw-role">Suporte · Gradiente</div>
+        <div class="sw-name">Ember</div>
+      </div>
+      <div class="sw-bot">
+        <div><span>HEX</span><span>#B15329</span></div>
+        <div><span>Var</span><span>--ember</span></div>
+      </div>
+    </div>
+
+    <div class="swatch dark-sw">
+      <div class="sw-top">
+        <div class="sw-role">Fundo · Base escura</div>
+        <div class="sw-name">Dark</div>
+      </div>
+      <div class="sw-bot">
+        <div><span>HEX</span><span>#151515</span></div>
+        <div><span>Var</span><span>--dark</span></div>
+      </div>
+    </div>
+
+    <div class="swatch dark2-sw">
+      <div class="sw-top">
+        <div class="sw-role">Fundo · Camada 2</div>
+        <div class="sw-name">Dark 2</div>
+      </div>
+      <div class="sw-bot">
+        <div><span>HEX</span><span>#1A1A1A</span></div>
+        <div><span>Var</span><span>--dark2</span></div>
+      </div>
+    </div>
+
+    <div class="swatch surface">
+      <div class="sw-top">
+        <div class="sw-role">Cards · Superfícies</div>
+        <div class="sw-name">Surface</div>
+      </div>
+      <div class="sw-bot">
+        <div><span>HEX</span><span>#1E1E1E</span></div>
+        <div><span>Var</span><span>--surface</span></div>
+      </div>
+    </div>
+
+    <div class="swatch light">
+      <div class="sw-top">
+        <div class="sw-role">Fundo · Claro editorial</div>
+        <div class="sw-name">Light</div>
+      </div>
+      <div class="sw-bot">
+        <div><span>HEX</span><span>#F5F2ED</span></div>
+        <div><span>Var</span><span>--light</span></div>
+      </div>
+    </div>
+
+    <div class="swatch light2">
+      <div class="sw-top">
+        <div class="sw-role">Claro · Camada 2</div>
+        <div class="sw-name">Light 2</div>
+      </div>
+      <div class="sw-bot">
+        <div><span>HEX</span><span>#EAE6DF</span></div>
+        <div><span>Var</span><span>--light2</span></div>
+      </div>
+    </div>
+
+    <div class="swatch wsp">
+      <div class="sw-top">
+        <div class="sw-role">Semântica · WhatsApp</div>
+        <div class="sw-name">Wsp Green</div>
+      </div>
+      <div class="sw-bot">
+        <div><span>HEX</span><span>#25D366</span></div>
+        <div><span>Var</span><span>--wsp</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="color-ratios">
+    <div class="ratio">
+      <div class="r-swatch" style="background:var(--fire);color:#fff">Aa</div>
+      <div class="r-label">Fire / White</div>
+      <div class="r-val">AA Large · 3.9:1</div>
+    </div>
+    <div class="ratio">
+      <div class="r-swatch" style="background:var(--dark);color:var(--text)">Aa</div>
+      <div class="r-label">Dark / Text</div>
+      <div class="r-val">AAA · 15.8:1</div>
+    </div>
+    <div class="ratio">
+      <div class="r-swatch" style="background:var(--light);color:var(--text-dark)">Aa</div>
+      <div class="r-label">Light / Ink</div>
+      <div class="r-val">AAA · 16.2:1</div>
+    </div>
+    <div class="ratio">
+      <div class="r-swatch" style="background:var(--dark);color:var(--fire)">Aa</div>
+      <div class="r-label">Dark / Fire</div>
+      <div class="r-val">AA Large · 4.1:1</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TYPOGRAPHY ============ -->
+<section class="page dark" id="type">
+  <div class="postit mint" style="top:230px;right:48px;max-width:200px">
+    o par <em>Jakarta + DM</em> ficou bem balanceado — display com peso, corpo limpo
+    <span class="sig">— Kevin</span>
+  </div>
+  <div class="page-head">
+    <div>
+      <span class="page-num">03 · Tipografia</span>
+      <h2 class="page-title" style="color:var(--text)">Letreiramento.</h2>
+    </div>
+    <div class="page-meta">2 famílias<br>Google Fonts</div>
+  </div>
+  <p class="lede" style="margin-bottom:56px">Duas fontes geométricas e contemporâneas que se complementam. <strong style="color:var(--text)">Plus Jakarta Sans</strong> para display e títulos — com peso visual e identidade forte. <strong style="color:var(--text)">DM Sans</strong> para corpo e interface — neutra, legível, estável em telas.</p>
+
+  <!-- Plus Jakarta Sans specimen -->
+  <div class="type-specimen">
+    <div class="ts-head">
+      <div class="ts-name jakarta">Plus Jakarta Sans</div>
+      <div class="ts-meta"><strong>Display · Títulos</strong><br>400 · 500 · 600 · 700 · 800<br>Google Fonts · Geométrica</div>
+    </div>
+    <div class="glyph-row jakarta">ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>abcdefghijklmnopqrstuvwxyz<br>0123456789 — áéíóú ão ç &amp; @</div>
+
+    <h3 class="sec-title" style="color:var(--text);margin-top:40px">Pesos</h3>
+    <div class="weight-grid">
+      <div class="weight-row"><span class="weight-label">400 · Regular</span><span class="weight-sample jakarta" style="font-weight:400">Hangar premium</span></div>
+      <div class="weight-row"><span class="weight-label">500 · Medium</span><span class="weight-sample jakarta" style="font-weight:500">Hangar premium</span></div>
+      <div class="weight-row"><span class="weight-label">600 · SemiBold</span><span class="weight-sample jakarta" style="font-weight:600">Hangar premium</span></div>
+      <div class="weight-row"><span class="weight-label">700 · Bold</span><span class="weight-sample jakarta" style="font-weight:700">Hangar premium</span></div>
+      <div class="weight-row"><span class="weight-label">800 · ExtraBold</span><span class="weight-sample jakarta" style="font-weight:800">Hangar premium</span></div>
+    </div>
+  </div>
+
+  <!-- DM Sans specimen -->
+  <div class="type-specimen">
+    <div class="ts-head">
+      <div class="ts-name dm">DM Sans</div>
+      <div class="ts-meta"><strong>Corpo · Interface</strong><br>300 · 400 · 500 · 600 · 700<br>Google Fonts · Neo-grotesque</div>
+    </div>
+    <div class="glyph-row dm">ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>abcdefghijklmnopqrstuvwxyz<br>0123456789 — áéíóú ão ç &amp; @</div>
+
+    <h3 class="sec-title" style="color:var(--text);margin-top:40px">Pesos</h3>
+    <div class="weight-grid">
+      <div class="weight-row"><span class="weight-label">300 · Light</span><span class="weight-sample dm" style="font-weight:300">Segurança 24 horas</span></div>
+      <div class="weight-row"><span class="weight-label">400 · Regular</span><span class="weight-sample dm" style="font-weight:400">Segurança 24 horas</span></div>
+      <div class="weight-row"><span class="weight-label">500 · Medium</span><span class="weight-sample dm" style="font-weight:500">Segurança 24 horas</span></div>
+      <div class="weight-row"><span class="weight-label">600 · SemiBold</span><span class="weight-sample dm" style="font-weight:600">Segurança 24 horas</span></div>
+      <div class="weight-row"><span class="weight-label">700 · Bold</span><span class="weight-sample dm" style="font-weight:700">Segurança 24 horas</span></div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ============ TYPOGRAPHIC SCALE (03b) ============ -->
+<section class="page dark" id="scale">
+  <div class="page-head">
+    <div>
+      <span class="page-num">03 · Tipografia</span>
+      <h2 class="page-title" style="color:var(--text)">Escala.</h2>
+    </div>
+    <div class="page-meta">7 níveis<br>hierarquia</div>
+  </div>
+  <p class="lede" style="margin-bottom:40px">Do hero ao fineprint — hierarquia calibrada em sete níveis, combinando Plus Jakarta Sans (display) e DM Sans (corpo).</p>
+
+  <div class="scale-table">
+    <div class="scale-row">
+      <span class="scale-tag">Display</span>
+      <span class="scale-size">72 · 800</span>
+      <span class="scale-sample" style="font-size:clamp(40px,7vw,72px);color:var(--text)">Hangar & precisão</span>
+    </div>
+    <div class="scale-row">
+      <span class="scale-tag">H1</span>
+      <span class="scale-size">48 · 800</span>
+      <span class="scale-sample" style="font-size:clamp(32px,5vw,48px);color:var(--text)">Título de seção</span>
+    </div>
+    <div class="scale-row">
+      <span class="scale-tag">H2</span>
+      <span class="scale-size">32 · 700</span>
+      <span class="scale-sample" style="font-size:32px;color:var(--text);font-weight:700">Subtítulo forte</span>
+    </div>
+    <div class="scale-row">
+      <span class="scale-tag">H3</span>
+      <span class="scale-size">22 · 700</span>
+      <span class="scale-sample" style="font-size:22px;color:var(--text);font-weight:700">Título de card</span>
+    </div>
+    <div class="scale-row">
+      <span class="scale-tag">Body</span>
+      <span class="scale-size">16 · 400</span>
+      <span class="scale-sample" style="font-size:16px;color:var(--dim);font-family:'DM Sans';font-weight:400;letter-spacing:0">Texto de parágrafo confortável para leitura em tela.</span>
+    </div>
+    <div class="scale-row">
+      <span class="scale-tag">Small</span>
+      <span class="scale-size">13 · 500</span>
+      <span class="scale-sample" style="font-size:13px;color:var(--dim);font-family:'DM Sans';font-weight:500;letter-spacing:0">Metadados e descrições auxiliares</span>
+    </div>
+    <div class="scale-row">
+      <span class="scale-tag">Caption</span>
+      <span class="scale-size">11 · 700 · uppercase</span>
+      <span class="scale-sample" style="font-size:11px;color:var(--fire);font-family:'Plus Jakarta Sans';font-weight:700;letter-spacing:4px;text-transform:uppercase">Eyebrow · rótulo de seção</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BUTTONS ============ -->
+<section class="page dark" id="buttons">
+  <div class="postit" style="top:230px;right:48px;max-width:200px;transform:rotate(2.8deg)">
+    o formato pílula virou assinatura visual. <u>manter em toda peça</u>.
+    <span class="sig">— Kevin</span>
+  </div>
+  <div class="page-head">
+    <div>
+      <span class="page-num">04 · Botões</span>
+      <h2 class="page-title" style="color:var(--text)">Ações.</h2>
+    </div>
+    <div class="page-meta">3 variantes<br>pill radius 100px</div>
+  </div>
+  <p class="lede" style="margin-bottom:56px">Botões sempre em formato pílula (raio total), com tipografia 14/600, ícone opcional à direita. O primário carrega a cor Fire e é reservado para a ação principal de cada tela.</p>
+
+  <div class="btn-grid">
+    <div class="btn-cell">
+      <span class="bc-tag">01 · Primário</span>
+      <button class="bc-btn f">Reservar hangar<svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+      <div class="bc-specs">
+        Fundo <span>--fire</span><br>
+        Texto <span>#FFFFFF</span><br>
+        Padding <span>16 / 32</span><br>
+        Radius <span>100px</span><br>
+        Hover <span>glow laranja</span>
+      </div>
+    </div>
+    <div class="btn-cell">
+      <span class="bc-tag">02 · Ghost</span>
+      <button class="bc-btn g">Ver serviços</button>
+      <div class="bc-specs">
+        Fundo <span>rgba(255,255,255,.05)</span><br>
+        Borda <span>rgba(255,255,255,.1)</span><br>
+        Texto <span>--text</span><br>
+        Uso <span>ação secundária</span>
+      </div>
+    </div>
+    <div class="btn-cell">
+      <span class="bc-tag">03 · WhatsApp</span>
+      <button class="bc-btn w">Falar no WhatsApp<svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></button>
+      <div class="bc-specs">
+        Fundo <span>--wsp #25D366</span><br>
+        Texto <span>#FFFFFF</span><br>
+        Uso <span>contato direto</span><br>
+        Ícone <span>obrigatório</span>
+      </div>
+    </div>
+
+    <div class="btn-cell">
+      <span class="bc-tag">04 · Header small</span>
+      <button class="bc-btn f sm">Contato</button>
+      <div class="bc-specs">
+        Font size <span>12 · uppercase</span><br>
+        Letter-spacing <span>0.8px</span><br>
+        Padding <span>10 / 22</span><br>
+        Uso <span>navegação fixa</span>
+      </div>
+    </div>
+    <div class="btn-cell">
+      <span class="bc-tag">05 · Tag pill</span>
+      <span class="demo-tag">Premium</span>
+      <div class="bc-specs">
+        Fundo <span>rgba(fire, .1)</span><br>
+        Texto <span>--fire</span><br>
+        Font <span>10 · 700 · uppercase</span><br>
+        Uso <span>categorias e labels</span>
+      </div>
+    </div>
+    <div class="btn-cell">
+      <span class="bc-tag">06 · Estados</span>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="bc-btn f sm">Default</button>
+        <button class="bc-btn f sm" style="transform:scale(.96)">Active</button>
+        <button class="bc-btn f sm" style="opacity:.5;cursor:not-allowed">Disabled</button>
+      </div>
+      <div class="bc-specs">
+        Active <span>scale(.96)</span><br>
+        Disabled <span>opacity .5</span><br>
+        Transition <span>.2s ease</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ COMPONENTS ============ -->
+<section class="page dark" id="components">
+  <div class="page-head">
+    <div>
+      <span class="page-num">05 · Componentes</span>
+      <h2 class="page-title" style="color:var(--text)">Blocos.</h2>
+    </div>
+    <div class="page-meta">Padrões recorrentes<br>do sistema</div>
+  </div>
+  <p class="lede" style="margin-bottom:56px">Componentes reutilizáveis — construídos sobre os tokens de cor, tipografia e espaçamento. Cada bloco abaixo é usado múltiplas vezes ao longo do site.</p>
+
+  <div class="comp-grid">
+    <div class="comp">
+      <span class="cp-tag">01 · Tags &amp; Pills</span>
+      <div class="demo-tags">
+        <span class="demo-tag">Hangaragem</span>
+        <span class="demo-tag">FBO</span>
+        <span class="demo-tag">24 horas</span>
+        <span class="demo-tag">Premium</span>
+      </div>
+      <p style="font-size:12px;color:var(--dim);margin-top:20px;line-height:1.6">Rótulos curtos para categorias e atributos. Letter-spacing amplo (2px) para respirar.</p>
+    </div>
+
+    <div class="comp">
+      <span class="cp-tag">02 · Trust bar</span>
+      <div class="demo-trust">
+        <div class="ti"><strong>24/7</strong><small>Operação</small></div>
+        <div class="ti"><strong>ANAC</strong><small>Homologado</small></div>
+        <div class="ti"><strong>FBO</strong><small>Completo</small></div>
+      </div>
+    </div>
+
+    <div class="comp">
+      <span class="cp-tag">03 · Card numérico</span>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+        <div class="demo-num"><div class="nv">24h</div><div class="nl">Segurança</div></div>
+        <div class="demo-num"><div class="nv">+15</div><div class="nl">Anos de operação</div></div>
+      </div>
+    </div>
+
+    <div class="comp">
+      <span class="cp-tag">04 · Feature item</span>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div class="demo-feat"><strong>Sala VIP executiva</strong><span>Espaço reservado para tripulação e passageiros</span></div>
+        <div class="demo-feat" style="border-left-color:rgba(255,255,255,.08);background:transparent"><strong>Abastecimento</strong><span>Jet A-1 e AvGas 100LL</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ICONS ============ -->
+<section class="page" id="icons">
+  <div class="postit orange" style="top:230px;right:48px;max-width:210px">
+    manter uma única biblioteca (<em>Lucide</em>) — misturar com outras quebra a unidade visual
+    <span class="sig">— Kevin</span>
+  </div>
+  <div class="page-head">
+    <div>
+      <span class="page-num">06 · Iconografia</span>
+      <h2 class="page-title">Ícones.</h2>
+    </div>
+    <div class="page-meta">Outline · 1.6px<br>24 × 24 · round</div>
+  </div>
+  <p class="lede" style="margin-bottom:56px">Biblioteca baseada em <strong>Lucide / Feather</strong>. Traço uniforme de 1.6px, linhas com terminação arredondada (<code style="font-family:'JetBrains Mono',monospace;font-size:12px;background:rgba(0,0,0,.05);padding:2px 6px;border-radius:4px">stroke-linecap:round</code>), preenchimento sempre vazio. Cor padrão: Fire.</p>
+
+  <div class="icon-grid">
+    <div class="icon-cell"><svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V10l7-5 7 5v11M9 21v-6h6v6"/></svg><span>Hangar</span></div>
+    <div class="icon-cell"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg><span>Serviço</span></div>
+    <div class="icon-cell"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><span>24h</span></div>
+    <div class="icon-cell"><svg viewBox="0 0 24 24"><path d="M12 22s-8-4.5-8-12a8 8 0 0 1 16 0c0 7.5-8 12-8 12z"/><circle cx="12" cy="10" r="3"/></svg><span>Local</span></div>
+    <div class="icon-cell"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg><span>Seguro</span></div>
+    <div class="icon-cell"><svg viewBox="0 0 24 24"><path d="M3 12l9-9 9 9M5 10v10h14V10"/><path d="M9 20v-6h6v6"/></svg><span>Base</span></div>
+    <div class="icon-cell"><svg viewBox="0 0 24 24"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 0 1 0 9z"/></svg><span>Clima</span></div>
+    <div class="icon-cell"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg><span>Chat</span></div>
+    <div class="icon-cell"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span>Tel</span></div>
+    <div class="icon-cell"><svg viewBox="0 0 24 24"><path d="M12 1l3 6 6 .9-4.5 4.3 1.1 6.3L12 15.8 6.4 18.5l1.1-6.3L3 7.9 9 7z"/></svg><span>Premium</span></div>
+    <div class="icon-cell"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span>Equipe</span></div>
+    <div class="icon-cell"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span>Avançar</span></div>
+  </div>
+</section>
+
+<!-- ============ SPACING & RADIUS ============ -->
+<section class="page" id="spacing">
+  <div class="page-head">
+    <div>
+      <span class="page-num">07 · Sistema</span>
+      <h2 class="page-title">Espaçamento.</h2>
+    </div>
+    <div class="page-meta">Base 4px<br>Grid 8px</div>
+  </div>
+  <p class="lede" style="margin-bottom:56px">Escala linear baseada em múltiplos de 4. Raios de canto seguem três níveis — suave (14px) para cards, amplo (20px) para heros, pill (100px) para botões.</p>
+
+  <div class="space-grid">
+    <div class="space-col">
+      <h4>Espaçamento</h4>
+      <div class="space-row"><span class="space-label">4</span><div class="space-bar" style="width:4px"></div><span class="space-val">--s-1 · 4px</span></div>
+      <div class="space-row"><span class="space-label">8</span><div class="space-bar" style="width:8px"></div><span class="space-val">--s-2 · 8px</span></div>
+      <div class="space-row"><span class="space-label">12</span><div class="space-bar" style="width:12px"></div><span class="space-val">--s-3 · 12px</span></div>
+      <div class="space-row"><span class="space-label">16</span><div class="space-bar" style="width:16px"></div><span class="space-val">--s-4 · 16px</span></div>
+      <div class="space-row"><span class="space-label">24</span><div class="space-bar" style="width:24px"></div><span class="space-val">--s-6 · 24px</span></div>
+      <div class="space-row"><span class="space-label">32</span><div class="space-bar" style="width:32px"></div><span class="space-val">--s-8 · 32px</span></div>
+      <div class="space-row"><span class="space-label">48</span><div class="space-bar" style="width:48px"></div><span class="space-val">--s-12 · 48px</span></div>
+      <div class="space-row"><span class="space-label">80</span><div class="space-bar" style="width:80px"></div><span class="space-val">--s-20 · 80px</span></div>
+    </div>
+    <div class="space-col">
+      <h4>Border radius</h4>
+      <div class="radius-grid">
+        <div class="radius-cell r8">8px</div>
+        <div class="radius-cell r14">14px</div>
+        <div class="radius-cell r20">20px</div>
+        <div class="radius-cell r100">pill</div>
+      </div>
+      <div style="margin-top:32px;padding:20px;background:rgba(0,0,0,.03);border-radius:14px">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--dim-dark);line-height:2">
+          <div><span style="color:var(--fire)">8px</span> · inputs e chips pequenos</div>
+          <div><span style="color:var(--fire)">14px</span> · cards &amp; features · <code>--r</code></div>
+          <div><span style="color:var(--fire)">20px</span> · heros &amp; blocos grandes</div>
+          <div><span style="color:var(--fire)">100px</span> · botões e tags (pill)</div>
+        </div>
+      </div>
+
+      <h4 style="margin-top:48px">Breakpoints</h4>
+      <div class="space-row"><span class="space-label">sm</span><span style="font-family:'DM Sans';font-size:13px">Mobile first · base</span><span class="space-val">&lt; 768px</span></div>
+      <div class="space-row"><span class="space-label">md</span><span style="font-family:'DM Sans';font-size:13px">Tablet · layouts grid</span><span class="space-val">≥ 768px</span></div>
+      <div class="space-row"><span class="space-label">lg</span><span style="font-family:'DM Sans';font-size:13px">Desktop · full editorial</span><span class="space-val">≥ 1100px</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ VOICE ============ -->
+<section class="page" id="voice">
+  <div class="postit pink" style="top:230px;right:52px;max-width:210px">
+    a ideia de "<em>comandante experiente</em>" captura bem — confiança sem firula
+    <span class="sig">— Kevin</span>
+  </div>
+  <div class="page-head">
+    <div>
+      <span class="page-num">08 · Voz &amp; Tom</span>
+      <h2 class="page-title">Como falamos.</h2>
+    </div>
+    <div class="page-meta">Editorial<br>pt-BR</div>
+  </div>
+  <p class="lede">A Rotorwest fala como um comandante experiente: confiança sem arrogância, técnica sem jargão, respeito pelo tempo do cliente. Prefira frases curtas, verbos diretos e números concretos.</p>
+
+  <div class="voice-grid">
+    <div class="voice-col do">
+      <h4><span class="dot"></span>Faça</h4>
+      <ul>
+        <li><strong>Direto:</strong> "Orçamento sem compromisso · Resposta em até 2h"</li>
+        <li><strong>Técnico e concreto:</strong> "Hangar coberto de 1.200m², Jet A-1 e AvGas 100LL"</li>
+        <li><strong>Benefício tangível:</strong> "Sua aeronave protegida, 24 horas por dia"</li>
+        <li><strong>Verbos ativos:</strong> "Reserve", "Solicite", "Converse com a equipe"</li>
+        <li><strong>Números ancorados:</strong> "+15 anos", "24/7", "100% homologado"</li>
+      </ul>
+    </div>
+    <div class="voice-col dont">
+      <h4><span class="dot"></span>Evite</h4>
+      <ul>
+        <li><strong>Exagero comercial:</strong> "O MELHOR hangar do Brasil!!!"</li>
+        <li><strong>Jargão corporativo:</strong> "Soluções inovadoras de value proposition"</li>
+        <li><strong>Frases longas:</strong> períodos com mais de duas vírgulas</li>
+        <li><strong>Vago:</strong> "Temos muitos serviços disponíveis"</li>
+        <li><strong>Emoji em conteúdo institucional:</strong> reserve para WhatsApp</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ENDCARD ============ -->
+<section class="endcard">
+  <div class="endcard-inner">
+    <img src="logo.svg" alt="Rotorwest" class="endcard-logo">
+    <h2 class="eh">Fim do <span>guia.</span></h2>
+    <p>Este sistema é vivo. Dúvidas, extensões ou novos componentes devem passar pelo time de design antes de entrar em produção.</p>
+
+    <div class="colofon">
+      <div>Projeto<strong>Rotorwest SAE</strong></div>
+      <div>Endereço<strong>Aeroporto dos Amarais · SDAM · Campinas/SP</strong></div>
+      <div>Versão<strong>v1.0 · 2026</strong></div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
