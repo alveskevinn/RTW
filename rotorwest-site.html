@@ -164,8 +164,18 @@ body::before{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;
 .loc-layout{display:flex;flex-direction:column;gap:32px}
 .loc-text .sec-p{margin-bottom:0}
 .loc-card{border-radius:20px;overflow:hidden;border:1px solid rgba(255,255,255,.05);background:var(--surface)}
-.loc-map{width:100%;aspect-ratio:16/10;overflow:hidden}
-.loc-map iframe{width:100%;height:100%;border:0}
+.loc-map{width:100%;aspect-ratio:16/10;overflow:hidden;position:relative}
+.loc-map iframe{width:100%;height:100%;border:0;display:block}
+.loc-map img{width:100%;height:100%;object-fit:cover;display:block}
+.loc-view{position:absolute;inset:0;opacity:0;visibility:hidden;transition:opacity .35s ease}
+.loc-view.on{opacity:1;visibility:visible}
+.loc-tabs{display:inline-flex;gap:4px;padding:4px;background:rgba(0,0,0,.04);border-radius:100px;border:1px solid rgba(0,0,0,.06)}
+.loc-tabs-wrap{display:flex;justify-content:center;padding:14px 14px 0}
+.loc-tab{background:transparent;border:none;color:var(--dim-dark);font:600 12px/1 'DM Sans',sans-serif;letter-spacing:.3px;padding:9px 16px;border-radius:100px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:color .2s,background .25s,box-shadow .25s}
+.loc-tab svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2}
+.loc-tab.on{background:var(--fire);color:#fff;box-shadow:0 4px 14px rgba(223,100,41,.35)}
+@media(hover:hover){.loc-tab:not(.on):hover{color:var(--text-dark);background:rgba(0,0,0,.04)}}
+.loc-tab:active{transform:scale(.96)}
 .loc-info{padding:28px 24px;display:flex;flex-direction:column;gap:18px}
 .loc-row{display:flex;align-items:flex-start;gap:14px;text-decoration:none;color:inherit;padding:12px;margin:-12px;border-radius:12px;transition:background .25s,transform .15s;position:relative}
 a.loc-row{cursor:pointer}
@@ -346,7 +356,7 @@ a.loc-row:active{transform:scale(.985)}
     <div class="svc-track" id="svcTrack">
       <div class="svc-card"><div class="svc-img"><img src="HANGARAGEM-HD.png" alt="Hangaragem Rotorwest"><div class="svc-num">01</div></div><div class="svc-body"><div class="svc-tag">Mais procurado</div><h3>Hangaragem</h3><p>Abrigo seguro para aeronaves de pequeno e médio porte. Estrutura de 2.000m² com isolamento acústico, térmico e vigilância 24 horas.</p></div><div class="svc-glow"></div></div>
       <div class="svc-card"><div class="svc-img"><img src="ABASTACIMENTO-HD.png" alt="Abastecimento de aeronaves"><div class="svc-num">02</div></div><div class="svc-body"><div class="svc-tag">Operacional</div><h3>Abastecimento</h3><p>Agendamos e coordenamos o abastecimento com fornecedores homologados do aeroporto, garantindo agilidade e rastreabilidade total do combustível.</p></div><div class="svc-glow"></div></div>
-      <div class="svc-card"><div class="svc-img"><img src="" alt="" style="display:none"><div class="skel"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="2"/><circle cx="8" cy="8" r="2"/><path d="M21 15l-5-5L5 21"/></svg><span>Foto — Sala de Reunião</span><div class="skel-border"></div></div><div class="svc-num">03</div></div><div class="svc-body"><div class="svc-tag">Exclusivo</div><h3>Sala de Reunião</h3><p>Reserve uma sala privada para reuniões dentro do hangar. Ambiente discreto e confortável para receber clientes, equipe ou parceiros antes ou depois do voo.</p></div><div class="svc-glow"></div></div>
+      <div class="svc-card"><div class="svc-img"><img src="SalaReuniao-HD.png" alt="Sala de reunião privativa Rotorwest"><div class="svc-num">03</div></div><div class="svc-body"><div class="svc-tag">Exclusivo</div><h3>Sala de Reunião</h3><p>Reserve uma sala privada para reuniões dentro do hangar. Ambiente discreto e confortável para receber clientes, equipe ou parceiros antes ou depois do voo.</p></div><div class="svc-glow"></div></div>
     </div>
     <div class="svc-dots" id="svcDots"></div>
   </div>
@@ -395,8 +405,8 @@ a.loc-row:active{transform:scale(.985)}
       <div class="feat-grid">
         <div class="feat-i rv active" data-title="Recepção" data-sub="Ambiente climatizado para receber tripulação e passageiros" data-img="Recepcao-HD.png" data-skel="Foto — Recepção"><div class="feat-tx"><strong>Isolamento Acústico e Térmico</strong><span>Telhas especiais e sala VIP climatizada</span></div></div>
         <div class="feat-i rv" data-title="Sala VIP" data-sub="Ambiente exclusivo e climatizado para passageiros e tripulação" data-img="SalaVip-HD.png" data-skel="Foto — Sala VIP"><div class="feat-tx"><strong>Sala VIP</strong><span>Ambiente exclusivo para passageiros e tripulação</span></div></div>
-        <div class="feat-i rv" data-title="Catering de Bordo" data-sub="Coordenamos junto ao piloto o serviço de catering" data-skel="Foto — Catering"><div class="feat-tx"><strong>Catering de Bordo</strong><span>Coordenamos junto ao piloto o serviço de catering</span></div></div>
-        <div class="feat-i rv" data-title="Sala de Reunião" data-sub="Espaço privativo reservado para conferências" data-skel="Foto — Sala de Reunião"><div class="feat-tx"><strong>Sala de Reunião</strong><span>Espaço privativo reservado para conferências</span></div></div>
+        <div class="feat-i rv" data-title="Catering de Bordo" data-sub="Coordenamos junto ao piloto o serviço de catering" data-img="CateringdeBordo.png" data-skel="Foto — Catering"><div class="feat-tx"><strong>Catering de Bordo</strong><span>Coordenamos junto ao piloto o serviço de catering</span></div></div>
+        <div class="feat-i rv" data-title="Sala de Reunião" data-sub="Espaço privativo reservado para conferências" data-img="SalaReuniao-HD.png" data-skel="Foto — Sala de Reunião"><div class="feat-tx"><strong>Sala de Reunião</strong><span>Espaço privativo reservado para conferências</span></div></div>
       </div>
     </div>
     <div class="struct-right rv">
@@ -417,9 +427,19 @@ a.loc-row:active{transform:scale(.985)}
       <p class="sec-p">No coração do interior paulista, com acesso direto às principais rodovias e a apenas 96km de São Paulo capital.</p>
     </div>
     <div class="loc-card rv">
-    <div class="loc-map"><img src="MAPAAEREOHD.png" alt="Mapa aéreo do hangar Rotorwest no Aeroporto dos Amarais" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+    <div class="loc-map">
+      <div class="loc-view on" data-loc-pane="aerea"><img src="MAPAAEREOHD.png" alt="Vista aérea do hangar Rotorwest no Aeroporto dos Amarais"></div>
+      <div class="loc-view" data-loc-pane="mapa"><iframe title="Mapa do Hangar Rotorwest" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3676.388463967156!2d-47.11056532506084!3d-22.862104036274825!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94c8c70f75a3f4bf%3A0xfd9e4854659d09f1!2sHangar%20RotorWest!5e0!3m2!1spt-BR!2sbr!4v1774897094749!5m2!1spt-BR!2sbr" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+    </div>
+    <div class="loc-tabs-wrap">
+      <div class="loc-tabs" role="tablist" aria-label="Alternar entre vistas do mapa">
+        <button class="loc-tab on" type="button" role="tab" aria-selected="true" data-loc-view="aerea"><svg viewBox="0 0 24 24"><path d="M2 22L13 2l4 9 5 2-11 9z"/><path d="M13 2l-1 12"/></svg>Vista aérea</button>
+        <button class="loc-tab" type="button" role="tab" aria-selected="false" data-loc-view="mapa"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Mapa</button>
+      </div>
+    </div>
     <div class="loc-info">
       <a class="loc-row" href="https://www.google.com/maps/search/?api=1&query=Rua+Sylvia+da+Silva+Braga,+415+-+Campinas+SP" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg><div><strong>Rua Sylvia da Silva Braga, 415</strong><small>Lote 63 — JD. Santa Mônica, Campinas/SP — CEP 13082-105</small></div><span class="loc-cta">Como chegar →</span></a>
+      <a class="loc-row" href="https://www.aisweb.aer.mil.br/?i=aerodromos&codigo=SDAM" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M2 22L13 2l4 9 5 2-11 9z"/><path d="M13 2l-1 12"/></svg><div><strong>Chegando de aeronave — SDAM</strong><small>Aeroporto dos Amarais · cartas, frequências e NOTAM no AISWEB</small></div><span class="loc-cta">Rota aérea →</span></a>
       <div class="loc-row loc-row-split">
         <div class="loc-row-head"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg><div><strong>+55 (19) 98381-1333</strong><small>WhatsApp e telefone</small></div></div>
         <div class="loc-actions">
@@ -474,6 +494,7 @@ mobNav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>mobNav.cl
 window.addEventListener('scroll',()=>{const y=window.scrollY;hdr.classList.toggle('s',y>60);stk.classList.toggle('on',y>600)},{passive:true});
 const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('v')})},{threshold:.12,rootMargin:'0px 0px -30px 0px'});
 document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+document.querySelectorAll('.loc-tab').forEach(btn=>{btn.addEventListener('click',()=>{const v=btn.dataset.locView,card=btn.closest('.loc-card');card.querySelectorAll('.loc-tab').forEach(b=>{const on=b===btn;b.classList.toggle('on',on);b.setAttribute('aria-selected',on)});card.querySelectorAll('.loc-view').forEach(p=>p.classList.toggle('on',p.dataset.locPane===v))})});
 const track=document.getElementById('svcTrack'),dotsC=document.getElementById('svcDots'),cards=track.querySelectorAll('.svc-card');
 function getCardStep(){return cards[0].offsetWidth+parseInt(getComputedStyle(track).gap)}
 function getVisible(){return Math.max(1,Math.round(track.clientWidth/getCardStep()))}
